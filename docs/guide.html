@@ -156,6 +156,132 @@
 <p><code> пусть а = "Hello world!"<br /> пусть б = 5 <br /> пусть в = истина <br /> выведи а б в</code></p>
 <p>Выведет:</p>
 <p><code> Hello world! 5.340000 true</code></p>
+<h2 id="expression">Выражения</h2>
+<p>Для более лёгкого парсинга было принято решение сделать все операторы префиксными, то есть сначала должен стоять оператор, а за ним все его аргументы. Аргументами выражения могут быть как число, булевый тип, вызов функции, переменная, так и другое выражение.</p>
+<p>При использовании логических и арифметических&nbsp;операторов, они должны быть выделены скобками.</p>
+<p>Таблица типов операторов:</p>
+<table style="height: 110px;" width="510">
+<tbody>
+<tr style="height: 27px;">
+<td style="width: 134.637px; height: 27px;">Операторы</td>
+<td style="width: 112.65px; height: 27px;">Тип аргументов</td>
+<td style="width: 112.65px; height: 27px;">Количество аргументов</td>
+<td style="width: 126.062px; height: 27px;">Возвращаемое значение</td>
+</tr>
+<tr style="height: 13px;">
+<td style="width: 134.637px; height: 13px;">+, -, *, /</td>
+<td style="width: 112.65px; height: 13px;">Число</td>
+<td style="width: 112.65px; height: 13px;">2</td>
+<td style="width: 126.062px; height: 13px;">Число</td>
+</tr>
+<tr style="height: 13px;">
+<td style="width: 134.637px; height: 13px;">!</td>
+<td style="width: 112.65px; height: 13px;">Булевый</td>
+<td style="width: 112.65px; height: 13px;">1</td>
+<td style="width: 126.062px; height: 13px;">Булевый</td>
+</tr>
+<tr style="height: 13.6625px;">
+<td style="width: 134.637px; height: 13.6625px;">&amp;, |</td>
+<td style="width: 112.65px; height: 13.6625px;">Булевый</td>
+<td style="width: 112.65px; height: 13.6625px;">2</td>
+<td style="width: 126.062px; height: 13.6625px;">Булевый</td>
+</tr>
+<tr style="height: 13px;">
+<td style="width: 134.637px; height: 13px;">=</td>
+<td style="width: 112.65px; height: 13px;">Булевый или число</td>
+<td style="width: 112.65px; height: 13px;">2</td>
+<td style="width: 126.062px; height: 13px;">Булевый</td>
+</tr>
+<tr style="height: 13px;">
+<td style="width: 134.637px; height: 13px;">&gt;, &lt;</td>
+<td style="width: 112.65px; height: 13px;">Число</td>
+<td style="width: 112.65px; height: 13px;">2</td>
+<td style="width: 126.062px; height: 13px;">Булевый</td>
+</tr>
+</tbody>
+</table>
+<p>Пример, программа:</p>
+<p><code>выведи (&lt; 2 5) # 2 &lt; 5 <br /> выведи (= истина ложь) # true == false<br /> выведи (+ (* 2 5) 4) # 2 * 5 + 4<br /> <br /> пусть а = 50<br /> выведи (- а (+ 40 2)) # a - (40 + 2)<br /> <br /> выведи (= (! ложь) (| истина ложь)) # !false == (true || false)</code></p>
+<p>Выведет:</p>
+<p><code> true false 14.000000 8.000000 true</code></p>
+<h2 id="condition">Условный оператор</h2>
+<p>Условный оператор объявляется с помощью ключевых слов "если", "тогда", "иначе" и выглядит следующим образом:</p>
+<p><code>если ({оператор условия})<br /> &nbsp;&nbsp;&nbsp;&nbsp;тогда:<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{действия если условие истино}<br /> &nbsp;&nbsp;&nbsp;&nbsp;иначе:<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{действия если условие ложно}<br /></code></p>
+<p>Все блоки кода выделяются табуляцией как показано в примере. Блока "иначе" может не быть, тогда оператор будет выглядеть вот так:</p>
+<p><code>если ({оператор условия})<br /> &nbsp;&nbsp;&nbsp;&nbsp;тогда:<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{действия если условие истино}<br /></code></p>
+<p>Оператор условия должен возвращать значение true или false. Пример, программы с условным оператором:</p>
+<p><code>пусть a = 50<br /> пусть б = 100<br /> <br /> если (&gt; a 40)<br /> &nbsp;&nbsp;&nbsp;&nbsp;тогда:<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;выведи "a &gt; 40 "<br /> <br /> если (&gt; a б)<br /> &nbsp;&nbsp;&nbsp;&nbsp;тогда:<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;выведи "a &gt; б "<br /> &nbsp;&nbsp;&nbsp;&nbsp;иначе:<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;выведи "a &lt;= б "<br /> выведи "{действие после условия}"<br /> <br /> если (!истина)<br /> &nbsp;&nbsp;&nbsp;&nbsp;тогда:<br /> &nbsp;&nbsp;&nbsp;&nbsp;иначе:<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;выведи "!истина = ложь"</code></p>
+<p>Выведет:</p>
+<p><code> a &gt; 40 a &lt;= б {действие после условия} !истина = ложь</code></p>
+<h2 id="function">Функции</h2>
+<p>Функция объявляется с помощью ключевого слова "функция" за которым следует список аргументов, а также тело самой функции. Выглядит это следующим образом:</p>
+<p><code>функция {название}({аргумент1}, ...):<br /> &nbsp;&nbsp;&nbsp;&nbsp;{тело функции}<br /> &nbsp;&nbsp;&nbsp;&nbsp;{оператор верни}<br /> </code></p>
+<p>Функция может не принимать аргументы, тогда список аргументов следует оставить пустым. Все команды в теле функции должны начинаться с табуляции. Функция может возвращать значение, тогда в ней должна быть команда "верни". Пример программы с использованием функций:</p>
+<p><code>функция ПриветМир():<br />
+&nbsp;&nbsp;&nbsp;&nbsp;верни "Hello World!"<br />
+<br />
+выведи ПриветМир<br />
+<br />
+функция Сумма(а, б):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;верни (+ а б)<br />
+<br />
+выведи Сумма 10 5<br />
+<br />
+функция Xor(x, y):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;если (= x y)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;тогда:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;верни ложь<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;иначе:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;верни истина<br />
+<br />
+выведи Xor истина ложь</code></p>
+
+<p>Вывод программы:</p>
+<p><code>Hello World! 15.000000 true </code></p>
+<p>Функции могут быть рекурсивными. Примеры функций факториала, степени и печати чисел от x до y:</p>
+<p><code>функция факториалРеализация(результат, н):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;если (| (= н 0) (= н 1))<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;тогда:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;верни результат<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;иначе:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;верни факториалРеализация (* результат н) (- н 1)<br />
+<br />
+функция факториал(н):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;верни факториалРеализация 1 н<br />
+<br />
+выведи факториал 5<br />
+<br />
+<br />
+функция печать(начало, конец):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;если (< начало конец)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;тогда:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;выведи начало<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;верни печать (+ 1 начало) конец<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;иначе:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;верни конец<br />
+<br />
+выведи печать 5 10<br />
+<br />
+<br />
+функция степеньРеализация(x, sum, current, n):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;если (= current n)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;тогда:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;верни sum<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;иначе:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;верни степеньРеализация x (* x sum) (+ 1 current) n<br />
+<br />
+функция степень(x, n):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;верни степеньРеализация x 1 0 n<br />
+<br />
+выведи степень 2 10</code></p>
+<p>
+  Вывод программы:
+</p>
+<p>
+  <code>
+    120.000000 5.000000 6.000000 7.000000 8.000000 9.000000 10.000000 1024.000000
+  </code>
+</p>
 </body>
 
 </html>
